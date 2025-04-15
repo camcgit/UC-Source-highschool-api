@@ -61,7 +61,7 @@ All API endpoints require an API key to be passed as a query parameter:
 |--------|----------------------------------------------------|----------------------------------------------------------|
 | GET    | `/api/v1/systemwide/all_hs_totals?key=...`         | All high schools with totals and percentages             |
 | GET    | `/api/v1/systemwide/highschools?key=...`           | List of all high schools with IDs and locations          |
-| GET    | `/api/v1/systemwide/highschool/id/<school_id>?key=...` | Data for a specific high school by ID               |
+
 
 > All systemwide data comes from a pre-flattened CSV and includes total applied, accepted, enrolled, and percentages.
 
