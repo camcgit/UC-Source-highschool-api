@@ -15,12 +15,14 @@ def hello_world():
 
 app = Flask(__name__)
 
-API_KEY = "a9YGOPPq2nCPSa2-QT2EjgEjcD-Bd5iFV8j2MbAbNkA"
+
+#example: <my_app_base_URL>/api/v1/systemwide/all_hs_totals?key=a9YGOPPq2nCPSa2QT2EjgEjcDBd5iFV8j2MbAbNkA
+API_KEY = "a9YGOPPq2nCPSa2QT2EjgEjcDBd5iFV8j2MbAbNkA"
 
 
 #load data
-uc_all_df = pd.read_csv("data/uc_hs_enrollment_systemwide.csv")
-uc_campus_df = pd.read_csv("data/uc_hs_enrollment_by_campus.csv")
+uc_all_df = pd.read_csv("data/UC_Source_HS_systemwide.csv")
+uc_campus_df = pd.read_csv("data/UC_Source_HS_by_campus.csv")
 
 
 def require_api_key():
@@ -34,24 +36,29 @@ def all_hs_data_systemwide():
 
     require_api_key()  # key protection
 
+    #which columns to include
     result = uc_all_df[[
-        "school_", "city_", "countystate_territory_",
+        "school_id", "school", "city", "countystate_territory",
         "total_applied", "total_accepted", "total_enrolled",
         "pct_accepted", "pct_enrolled"
     ]]
 
+    #Convert the dataframe into JSON 
     return result.to_json(orient="records")
 
 @app.route('/api/v1/systemwide/highschools')
 def list_all_highschools():
-   # require_api_key()
 
-    hs_list = uc_all_df[["school_", "city_", "countystate_territory_"]].drop_duplicates().sort_values("school_")
+    #Returns a list of all highschools in the data, along with ID and location data.
+    require_api_key()
+
+    hs_list = uc_all_df[[ "school_id", "school_", "city_", "countystate_territory_"]].drop_duplicates().sort_values("school_")
 
     return hs_list.to_json(orient="records")
 
 @app.route('/')
 def home():
 
+    #Home page with basic info about API
     return render_template('index.html')
      
