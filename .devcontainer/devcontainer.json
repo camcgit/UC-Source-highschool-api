@@ -12,7 +12,8 @@
   "portsAttributes": {
     "5000": {
       "label": "Application",
-      "onAutoForward": "openPreview"
+      "onAutoForward": "openPreview",
+       "visibility": "public"
     }
   },
   "customizations": {
