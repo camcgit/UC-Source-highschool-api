@@ -17,19 +17,47 @@ uc_campus_df = pd.read_csv("data/UC_Source_HS_by_campus.csv")
 
 
 
-# TODO #1 Make an endpoint that returns all campus data.
-# Similar to /api/v1/systemwide/all_hs_totals, but using
-# uc_campus_df, to get each row in the dataframe.
-#
+# TODO 1: returns all campus data by HS
+
+@app.route('/api/v1/bycampus/all_hs')
+def all_hs_data_by_campus():
+    #require_api_key()
+
+    result = uc_campus_df[[
+        "school_id", "school", "city", "countystate_territory", "university",
+        "total_applied", "total_accepted", "total_enrolled",
+        "pct_accepted", "pct_enrolled"
+    ]]
+    return jsonify(result.to_dict(orient="records"))
 
 
 
+# TODO #2  /api/v1/systemwide/highschools/search?name=lincoln&key=<thekey>
 
-# TODO #2 Make an endpoint that returns a list of all schools that match a query name
-#  along with it's ID and location. There are schools that have the same name!
-#
+@app.route('/api/v1/systemwide/highschools/search')
+def search_highschools():
+    #require_api_key()
 
+    #Get the name search term from the URL, no spaces, lowercased.
+    query = request.args.get("name", "").strip().lower()
 
+    #in case there is no query term passed
+    if not query:
+        return jsonify({"error": "Missing query parameter: name"}), 400
+
+    #Use Python to search for a match in the name.
+    # Example (linc would return all schools that had Lincoln in the name, etc. )
+
+    matches = uc_all_df[uc_all_df["school"].str.lower().str.contains(query)]
+
+    if matches.empty:
+        return jsonify({"message": f"No schools found matching '{query}'"}), 404
+    
+    result = matches[[
+        "school_id", "school", "city", "countystate_territory"
+    ]].drop_duplicates().sort_values("school")
+
+    return jsonify(result.to_dict(orient="records"))
 
 
 # TODO #3 Make an endpoint that returns individual school data by school_id
