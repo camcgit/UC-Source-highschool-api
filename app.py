@@ -17,32 +17,27 @@ uc_campus_df = pd.read_csv("data/UC_Source_HS_by_campus.csv")
 
 
 
-# TODO #1 Make a route that returns a list of all schools and their IDs
+# TODO #1 Make an endpoint that returns a list of all schools that match a query name
+#  along with it's ID and location. There are schools that have the same name!
 #
 
 
 
 
+# TODO #2 Make an endpoint that returns individual school data by school_id
+#  Use that to return all data from that school, by campus and systemwide.
+# [including applications, acceptance, enrollment]
 
-# TODO #2 Make a Route that returns individual school data by id
-#  Each school has a unique ID. Use that to return all data from that school 
-#  A JSON object
+
+
+
+
+# TODO #3 Make an endpoint that takes a campus name <Berkeley> and returns
+#  admissions data, including admissions: [total applicatns, acceptance and enrollments],
+#  [top 10 feeder schools in terms of total enrollees], [top 10 schools with highest
+#   acceptance rates], [demographic totals of applicants, acceptance, and enrollment by 
+#   group], [demographic admission averages]
 #
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
