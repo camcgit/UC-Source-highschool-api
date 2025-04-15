@@ -7,15 +7,6 @@ app = Flask(__name__)
 
 
 
-@app.route("/")
-def hello_world():
-    return render_template("index.html", title="Hello")
-
-
-
-app = Flask(__name__)
-
-
 #example: <my_app_base_URL>/api/v1/systemwide/all_hs_totals?key=a9YGOPPq2nCPSa2QT2EjgEjcDBd5iFV8j2MbAbNkA
 API_KEY = "a9YGOPPq2nCPSa2QT2EjgEjcDBd5iFV8j2MbAbNkA"
 
