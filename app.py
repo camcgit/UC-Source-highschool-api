@@ -34,7 +34,7 @@ def all_hs_data_systemwide():
     ]]
 
     #Convert the dataframe into JSON 
-    return result.to_json(orient="records")
+    return jsonify(result.to_dict(orient="records"))
 
 @app.route('/api/v1/systemwide/highschools')
 def list_all_highschools():
@@ -42,9 +42,10 @@ def list_all_highschools():
     #Returns a list of all highschools in the data, along with ID and location data.
     require_api_key()
 
-    hs_list = uc_all_df[[ "school_id", "school_", "city_", "countystate_territory_"]].drop_duplicates().sort_values("school_")
+    result = uc_all_df[[ "school_id", "school", "city", "countystate_territory"]].drop_duplicates().sort_values("school")
 
-    return hs_list.to_json(orient="records")
+   
+    return jsonify(result.to_list.to_dict(orient="records"))
 
 @app.route('/')
 def home():
