@@ -16,6 +16,40 @@ uc_all_df = pd.read_csv("data/UC_Source_HS_systemwide.csv")
 uc_campus_df = pd.read_csv("data/UC_Source_HS_by_campus.csv")
 
 
+
+# TODO #1 Make a route that returns a list of all schools and their IDs
+#
+
+
+
+
+
+# TODO #2 Make a Route that returns individual school data by id
+#  Each school has a unique ID. Use that to return all data from that school 
+#  A JSON object
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def require_api_key():
     key = request.args.get("key")
     if key != API_KEY:
@@ -35,7 +69,7 @@ def all_hs_data_systemwide():
     ]]
 
     #Convert the dataframe into JSON 
-    return result.to_json(orient="records")
+    return jsonify(result.to_dict(orient="records"))
 
 @app.route('/api/v1/systemwide/highschools')
 def list_all_highschools():
@@ -43,9 +77,10 @@ def list_all_highschools():
     #Returns a list of all highschools in the data, along with ID and location data.
     require_api_key()
 
-    hs_list = uc_all_df[[ "school_id", "school_", "city_", "countystate_territory_"]].drop_duplicates().sort_values("school_")
+    result = uc_all_df[[ "school_id", "school", "city", "countystate_territory"]].drop_duplicates().sort_values("school")
 
-    return hs_list.to_json(orient="records")
+   
+    return jsonify(result.to_list.to_dict(orient="records"))
 
 @app.route('/')
 def home():
