@@ -31,8 +31,12 @@ uc_campus_df = pd.read_csv("data/UC_Source_HS_by_campus.csv")
 
 
 
+# TODO #3 Same as above, but match by city.
+#
 
-# TODO #3 Make an endpoint that returns individual school data by school_id
+
+
+# TODO #4 Make an endpoint that returns individual school data by school_id
 #  Use that to return all data from that school, by campus and systemwide.
 # [including applications, acceptance, enrollment]
 
@@ -40,7 +44,7 @@ uc_campus_df = pd.read_csv("data/UC_Source_HS_by_campus.csv")
 
 
 
-# TODO #4 Make an endpoint that takes a campus name <Berkeley> and returns
+# TODO #5 Make an endpoint that takes a campus name <Berkeley> and returns
 #  admissions data, including admissions: [total applicatns, acceptance and enrollments],
 #  [top 10 feeder schools in terms of total enrollees], [top 10 schools with highest
 #   acceptance rates], [demographic totals of applicants, acceptance, and enrollment by 
