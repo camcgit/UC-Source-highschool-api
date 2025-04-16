@@ -11,8 +11,8 @@ API_KEY = "a9YGOPPq2nCPSa2QT2EjgEjcDBd5iFV8j2MbAbNkA"
 
 
 #load data
-uc_all_df = pd.read_csv("data/UC_Source_HS_systemwide.csv")
-uc_campus_df = pd.read_csv("data/UC_Source_HS_by_campus.csv")
+uc_all_df = pd.read_csv("data/UC_Source_HS_system.csv")
+uc_campus_df = pd.read_csv("data/UC_Source_HS_by_uc_campus.csv")
 
 
 def require_api_key():
