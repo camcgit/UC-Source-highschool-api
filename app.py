@@ -6,8 +6,8 @@ import pandas as pd
 app = Flask(__name__)
 
 
-#example: <my_app_base_URL>/api/v1/systemwide/all_hs_totals?key=a9YGOPPq2nCPSa2QT2EjgEjcDBd5iFV8j2MbAbNkA
-API_KEY = "a9YGOPPq2nCPSa2QT2EjgEjcDBd5iFV8j2MbAbNkA"
+#TODO 1: Create an API key
+API_KEY = ""
 
 
 #load data
@@ -20,32 +20,32 @@ def require_api_key():
     if key != API_KEY:
         abort(403, description="Forbidden: Invalid API key")
 
-#returns all schools
+#TODO 2: Finish endpoint to return all HS data for UC system
 @app.route('/api/v1/systemwide/all_hs_totals')
 def all_hs_data_systemwide():
 
     require_api_key()  # key protection
 
-    #which columns to include
+    #Include all the relevant columns
     result = uc_all_df[[
-        "school_id", "school", "city", "countystate_territory",
-        "total_applied", "total_accepted", "total_enrolled",
-        "pct_accepted", "pct_enrolled"
+         
     ]]
 
     #Convert the dataframe into JSON 
     return jsonify(result.to_dict(orient="records"))
 
+
+# TODO 3: Return all High Schools in the data, incl. location and ID.
 @app.route('/api/v1/systemwide/highschools')
 def list_all_highschools():
 
-    #Returns a list of all highschools in the data, along with ID and location data.
     require_api_key()
 
-    result = uc_all_df[[ "school_id", "school", "city", "countystate_territory"]].drop_duplicates().sort_values("school")
-
+    #build result from requried dataframe columns. drop duplicates and sort by school name.
+    result = ...
    
-    return jsonify(result.to_list.to_dict(orient="records"))
+    #fix return so it serves JSON
+    return result
 
 @app.route('/')
 def home():
