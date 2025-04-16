@@ -18,11 +18,7 @@ code {
 .App {
     text-align: center;
 }
-
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
+ 
 
 .App-header {
     background-color: #282c34;
@@ -42,5 +38,5 @@ code {
  
 
 .small {
-    font-size: 0.75rem;
+    font-size: 1.05rem;
 }
