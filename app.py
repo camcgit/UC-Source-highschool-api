@@ -41,7 +41,7 @@ def list_all_highschools():
 
     require_api_key()
 
-    #build result from requried dataframe columns. drop duplicates and sort by school name.
+    #build result from required dataframe columns. drop duplicates and sort by school name.
     result = ...
    
     #fix return so it serves JSON
