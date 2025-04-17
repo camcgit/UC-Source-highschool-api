@@ -2,14 +2,12 @@
 from flask import Flask, request, jsonify, abort, render_template
 import os
 import pandas as pd
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 
-
-
-#example: <my_app_base_URL>/api/v1/systemwide/all_hs_totals?key=a9YGOPPq2nCPSa2QT2EjgEjcDBd5iFV8j2MbAbNkA
-API_KEY = ""  #change to env file
-
+load_dotenv()  # load from .env
+API_KEY = os.environ.get("API_KEY")
 
 #load data
 uc_all_df = pd.read_csv("data/UC_Source_HS_system.csv")
@@ -20,7 +18,7 @@ uc_campus_df = pd.read_csv("data/UC_Source_HS_by_uc_campus.csv")
 
 @app.route('/api/v1/bycampus/all_hs')
 def all_hs_data_by_campus():
-    #require_api_key()
+    require_api_key()
 
     result = uc_campus_df[[
         "school_id", "school", "city", "countystate_territory", "university",
@@ -35,7 +33,7 @@ def all_hs_data_by_campus():
 
 @app.route('/api/v1/systemwide/highschools/search')
 def search_highschools():
-    #require_api_key()
+    require_api_key()
 
     #Get the name search term from the URL, no spaces, lowercased.
     query_name = request.args.get("name", "").strip().lower()
@@ -66,7 +64,7 @@ def search_highschools():
 @app.route('/api/v1/school-detail/<school_id>')
 def get_highschool_detail(school_id):
 
-    #require_api_key()
+    require_api_key()
 
     school_id = int(school_id)
 
@@ -119,7 +117,7 @@ def get_highschool_detail(school_id):
 
 @app.route('/api/v1/campus/<campus_name>')
 def get_campus_profile(campus_name):
-    #require_api_key()
+    require_api_key()
 
     campus_df = uc_campus_df[uc_campus_df["university"].str.lower() == campus_name.lower()]
 
@@ -186,7 +184,7 @@ def require_api_key():
 @app.route('/api/v1/systemwide/all_hs_totals')
 def all_hs_data_systemwide():
 
-    #require_api_key()  # key protection
+    require_api_key()  # key protection
 
     #which columns to include
     result = uc_all_df[[
