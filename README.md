@@ -9,7 +9,7 @@ Data was obtained and compiled from the [University of California's Information 
 
 ### Todos:
 
-1. Create an API key and require it for access to endpoints.
+1. Create and secure an API key and require it for access to endpoints.
 2. Finish the first endpoint `/api/v1/systemwide/all_hs_totals` to return all HS data for UC system.
 3. Return all High Schools in the data, including location and ID for this endpoint: `@app.route('/api/v1/systemwide/highschools')`
 4. Test and validate on clients.
