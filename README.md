@@ -1,79 +1,13 @@
 
-# UC High School Insights API
+# UC High School Admissions API
 
-This Flask-based API serves cleaned and enriched data about applications, admissions, and enrollments from California public high schools to the University of California system. It includes both systemwide and campus-level views of the data, designed for use in education, research, and civic data projects.
-
-Data was obtained and compiled from the [University of California's Information Center](https://www.universityofcalifornia.edu/about-us/information-center/admissions-source-school)
+This is a Flask-based RESTful API that serves structured data on applications, admissions, and enrollments from California public high schools to University of California campuses. It is designed as a teaching tool and a public resource.
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Live Demo
 
-### Option 1: Run in GitHub Codespaces
-
-This project is preconfigured for GitHub Codespaces. Just open the Codespace and the Flask server will automatically run on port `5000`.
-
-Make sure to set the port visibility to **public** if you want to test the API in your browser.
-
-### Option 2: Run Locally
-
-1. Create a virtual environment and activate it:
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   ```
-
-2. Install dependencies:
-   ```bash
-   pip install flask pandas
-   ```
-
-3. Start the server:
-   ```bash
-   flask run --host=0.0.0.0 --port=5000
-   ```
-
----
-
-## 🔐 API Key Access
-
-All API endpoints require an API key to be passed as a query parameter:
-
-```
-?key=YOUR_API_KEY
-```
-
-> You can change the `API_KEY` inside `app.py`.
-
----
-
-## 📊 Current Endpoints
-
-### 🔹 General
-
-| Method | Endpoint                                      | Description                             |
-|--------|-----------------------------------------------|-----------------------------------------|
-| GET    | `/`                                           | Home page with basic info               |
-
-### 🔹 Systemwide Data
-
-| Method | Endpoint                                           | Description                                              |
-|--------|----------------------------------------------------|----------------------------------------------------------|
-| GET    | `/api/v1/systemwide/all_hs_totals?key=...`         | All high schools with totals and percentages             |
-| GET    | `/api/v1/systemwide/highschools?key=...`           | List of all high schools with IDs and locations          |
-
-
-> All systemwide data comes from a pre-flattened CSV and includes total applied, accepted, enrolled, and percentages.
-
----
-
-## 💡 Ideas for Extensions
-
-- Add filters by county, city, or class year
-- Add per-campus data views (`uc_campus_df`)
-- Add demographic breakdowns (e.g., race/ethnicity)
-- Secure the API key using headers instead of query parameters
-- Build a Streamlit or React frontend to visualize the data
+Once deployed, students can query real-time UC admissions data using the API.
 
 ---
 
@@ -81,23 +15,84 @@ All API endpoints require an API key to be passed as a query parameter:
 
 ```
 .
-├── app.py                  # Main Flask application
-├── data/                   # Folder for uploaded data files
-│   ├── UC_Source_HS_systemwide.csv
-│   └── UC_Source_HS_by_campus.csv
+├── app.py                      # Main Flask application
+├── data/
+│   ├── UC_Source_HS_system.csv
+│   └── UC_Source_HS_by_uc_campus.csv
 ├── templates/
-│   └── index.html          # Optional landing page
-├── .devcontainer/
-│   └── devcontainer.json   # Configuration for Codespaces
-└── README.md               # You’re reading it!
+│   └── index.html              # Home route (optional)
+│   └── api_docs.html           # API documentation page
+├── requirements.txt
+├── README.md
 ```
 
 ---
 
-## 📜 License
+## 🔑 Authentication
 
-MIT — free to use and modify for educational and civic data projects.
+Some endpoints require an API key passed as a query parameter:
+
+```
+?key=YOUR_API_KEY
+```
 
 ---
 
-Built by *vivertido* for learning, teaching, and open data.
+## 📊 Endpoints
+
+### `/api/v1/systemwide/all_hs_totals`
+Returns totals (applied, accepted, enrolled) for each high school across the UC system.
+
+### `/api/v1/systemwide/highschools`
+Returns a list of all schools with IDs and locations.
+
+### `/api/v1/systemwide/highschools/search?name=<name>&city=<city>`
+Returns filtered list of schools by name and/or city.
+
+### `/api/v1/school-detail/<school_id>`
+Returns totals for a specific school, including breakdown by campus.
+
+### `/api/v1/bycampus/all_hs`
+Returns all school totals by UC campus.
+
+### `/api/v1/campus/<campus_name>`
+Returns total admissions stats and top schools for a campus.
+
+---
+
+## 📌 Data Suppression Policy
+
+To protect student privacy, the following rules apply:
+
+- If fewer than **5 students** applied in a category, that data is suppressed.
+- If fewer than **3 students** enrolled or were admitted in a category, the count is shown as 0.
+- If **100%** of a school's applicants belong to one category, that category is redacted.
+
+---
+
+## 📦 Installation
+
+```bash
+pip install -r requirements.txt
+python app.py
+```
+
+---
+
+## 🧠 Learning Goals
+
+- Understand RESTful APIs
+- Query and filter data using endpoints
+- Explore real-world education data
+
+---
+
+## 🧑‍💻 Contributing
+
+Please submit a pull request if you'd like to extend functionality, refactor endpoints, or improve docs.
+
+---
+
+## 🪪 License
+
+MIT License – Open for educational use.
