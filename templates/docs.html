@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UC Admissions API Docs</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            max-width: 850px;
+            margin: auto;
+            padding: 2rem;
+        }
+        h1, h2 {
+            color: #1a237e;
+        }
+        code {
+            background: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        pre {
+            background: #f8f8f8;
+            padding: 1rem;
+            border-left: 4px solid #ccc;
+            overflow-x: auto;
+        }
+        .note {
+            background: #fff3cd;
+            border-left: 6px solid #ffeeba;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>UC Admissions API Documentation</h1>
+
+<p>This API provides access to structured admissions data from California public high schools to University of California campuses. You can use this API to explore totals, breakdowns, and school-level details.</p>
+
+<div class="note">
+  <strong>⚠️ Important Note on Data Suppression</strong>
+  <ul>
+    <li>For privacy, data is suppressed when fewer than <strong>5 students apply</strong> to a given campus or demographic category.</li>
+    <li>If <strong>fewer than 3 students</strong> are admitted or enroll from a given group, their counts will be shown as <code>0</code>.</li>
+    <li>If <strong>100% of applicants</strong> come from a single demographic group, that group is redacted to protect identity.</li>
+  </ul>
+</div>
+
+<hr>
+
+<h2> Authentication</h2>
+<p>All endpoints require an API key passed as a query parameter:</p>
+<pre>?key=YOUR_API_KEY</pre>
+
+---
+
+<h2> Endpoints</h2>
+
+<h3>GET /api/v1/systemwide/all_hs_totals</h3>
+<p>Returns total applied, accepted, and enrolled per school across all UC campuses.</p>
+<pre>GET /api/v1/systemwide/all_hs_totals?key=YOUR_KEY</pre>
+
+---
+
+<h3>GET /api/v1/systemwide/highschools</h3>
+<p>Returns a list of all high schools with their ID, city, and county/state/territory.</p>
+<pre>GET /api/v1/systemwide/highschools?key=YOUR_KEY</pre>
+
+---
+
+<h3>GET /api/v1/systemwide/highschools/search</h3>
+<p>Search by school name and/or city.</p>
+<pre>GET /api/v1/systemwide/highschools/search?name=academy&city=oakland&key=YOUR_KEY</pre>
+
+---
+
+<h3>GET /api/v1/school-detail/&lt;school_id&gt;</h3>
+<p>Returns systemwide and campus-level totals for one high school.</p>
+<pre>GET /api/v1/school-detail/12345?key=YOUR_KEY</pre>
+
+---
+
+<h3>GET /api/v1/bycampus/all_hs</h3>
+<p>Returns campus-specific totals for each high school.</p>
+<pre>GET /api/v1/bycampus/all_hs?key=YOUR_KEY</pre>
+
+---
+
+<h3>GET /api/v1/campus/&lt;campus_name&gt;</h3>
+<p>Returns summary and demographic totals for a specific UC campus.</p>
+<pre>GET /api/v1/campus/berkeley?key=YOUR_KEY</pre>
+
+<hr>
+
+<p style="text-align: center; color: #999;"> github.com/vivertido | Built for educational use</p>
+
+</body>
+</html>
