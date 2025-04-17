@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 
 #example: <my_app_base_URL>/api/v1/systemwide/all_hs_totals?key=a9YGOPPq2nCPSa2QT2EjgEjcDBd5iFV8j2MbAbNkA
-API_KEY = "a9YGOPPq2nCPSa2QT2EjgEjcDBd5iFV8j2MbAbNkA"  #change
+API_KEY = ""  #change to env file
 
 
 #load data
@@ -62,8 +62,6 @@ def search_highschools():
 
 
 # TODO #4 Make an endpoint that returns individual school data by school_id
-#  Use that to return all data from that school, by campus and systemwide.
-# [including applications, acceptance, enrollment]
 
 @app.route('/api/v1/school-detail/<school_id>')
 def get_highschool_detail(school_id):
@@ -117,11 +115,8 @@ def get_highschool_detail(school_id):
 
 
 # TODO #5 Make an endpoint that takes a campus name <Berkeley> and returns
-#  admissions data, including admissions: [total applicatns, acceptance and enrollments],
-#  [top 10 feeder schools in terms of total enrollees], [top 10 schools with highest
-#   acceptance rates], [demographic totals of applicants, acceptance, and enrollment by 
-#   group], [demographic admission averages]
-#
+#  admissions data
+
 @app.route('/api/v1/campus/<campus_name>')
 def get_campus_profile(campus_name):
     #require_api_key()
@@ -219,3 +214,6 @@ def home():
     #Home page with basic info about API
     return render_template('index.html')
      
+@app.route('/docs')
+def docs():
+    return render_template('docs.html')
