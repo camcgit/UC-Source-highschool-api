@@ -187,10 +187,10 @@ def all_hs_data_systemwide():
     require_api_key()  # key protection
 
     #which columns to include
-    result = uc_all_df[[
+    result = uc_all_df[
         "school_id", "school", "city", "countystate_territory",
         "total_applied", "total_accepted", "total_enrolled"
-    ]]
+    ]
 
     #Convert the dataframe into JSON 
     return jsonify(result.to_dict(orient="records"))
