@@ -27,12 +27,12 @@ uc_campus_df = pd.read_csv("data/UC_Source_HS_by_campus.csv")
 
 # TODO #2 Make an endpoint that returns a list of all schools that match a query name
 #  along with it's ID and location. There are schools that have the same name!
-#
 
 
 
-# TODO #3 Same as above, but match by city.
-#
+
+# TODO #3 Can be combined with #2 above, but match by city.
+
 
 
 
@@ -47,8 +47,8 @@ uc_campus_df = pd.read_csv("data/UC_Source_HS_by_campus.csv")
 # TODO #5 Make an endpoint that takes a campus name <Berkeley> and returns
 #  admissions data, including admissions: [total applicatns, acceptance and enrollments],
 #  [top 10 feeder schools in terms of total enrollees], [top 10 schools with highest
-#   acceptance rates], [demographic totals of applicants, acceptance, and enrollment by 
-#   group], [demographic admission averages]
+#   acceptance numbers], [demographic totals of applicants, acceptance, and enrollment by 
+#   group], [demographic admission averages], etc.
 #
 
 
