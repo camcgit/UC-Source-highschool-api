@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 app = Flask(__name__)
 
 load_dotenv()  # load from .env
-API_KEY = os.environ.get("API_KEY")
+#API_KEY = os.environ.get("API_KEY")
+API_KEY="DEMO"
 
 #load data
 uc_all_df = pd.read_csv("data/UC_Source_HS_system.csv")
